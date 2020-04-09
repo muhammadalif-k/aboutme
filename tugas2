@@ -1,8 +1,0 @@
-<?php
-echo "Nama : Muhammad Alif Kurniawan"
-echo "Kelas : XI RPL 2"
-echo "Sekolah : SMK Taruna Bhakti"
-echo "Alamat : Jalan Bulak Sari ,No.38 ,Kel. Kali Sari ,Kec. Pasar Rebo ,Jakarta timur"
-echo "Nomor Handphone : 089509527683"
-echo "Email : muhammadalifkurniawan07@gmail.com"
-?>
