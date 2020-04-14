@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Input Barang</title>
+    <style type="text/css">
+        h1{
+            color: rgb(0, 255, 254);
+            font-family: Georgia, 'Century Gothic', Times, serif;
+        }
+        body{
+            color: rgb(0, 0, 0);
+            background-image: url(sidik.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+            width: 50%;
+            margin: auto;
+            padding: 10px;
+            padding-left: 5%;
+        }
+        button{
+            margin: auto;
+            width: 110px;
+            position: relative;
+        }
+        .form-group{
+            color: rgb(0, 255, 254);
+            font-family:  Georgia, 'Century Gothic', Times, serif;
+        }
+        .value{
+            color: rgb(0, 255, 254);
+        }
+    </style>
+    <body>
+        <div class="container">
+            <center><h1>Form Input Produk</h1></center>
+
+    
+    <form method="POST" action="simpanproduk.php">
+        <div class="form-group">
+            <label for="staticEmail" color="rgb(0, 0, 0)">Kode Produk</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="kd_produk" placeholder="Kode Produk">
+            </div>
+        </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nama Produk</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="nama" placeholder="Nama Produk">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Harga Produk</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="harga" placeholder="Harga produk">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Satuan</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="satuans" id="">
+                        <option value="Piring">Piring</option>
+                        <option value="Gelas">Gelas</option>
+                        <option value="Soda">Soda</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Kategori</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="kategoris" id="">
+                        <option value="Makanan">Makanan</option>
+                        <option value="Minuman">Minuman</option>
+                        <option value="Lainnya">Lainnya</option> 
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">URL Gambar</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="url_gambars" placeholder="URL Gambar">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Stok</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="stoks" placeholder="Stok">
+                </div>
+            </div>
+            <center><button type="submit" class="btn btn-success" value="Register" a href="simpanproduk.php">Next</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+            </center>
+    </form>
+    <br>
+    <br>
+    <br>
+    <?php
+include('CRUD/koneksi.php');
+$key=$_GET['key'];
+$hasil=$con->exec("DELETE * FROM `produk` WHERE `kd_produk`=$key ");
+
+if($hasil==TRUE){
+    echo "Data Berhasil di Hapus";
+    header("location:dataproduk.php");
+}else{
+    echo "Data Gagal di Hapus";
+}
+?>
+
+<?php
+include('CRUD/koneksi.php');
+$hasil=$con->query("SELECT * FROM `produk`");
+
+?>
+
+<table class="table">
+<thead class="thead-dark">
+<tr> 
+    <th>Kode Produk</th>
+    <th>Nama Produk</th>
+    <th>Harga Produk</th>
+    <th>Satuan</th>
+    <th>Kategori</th>
+    <th>URL Gambar</th>
+    <th>Modify</th>
+</tr>
+
+<?php foreach ($hasil as $data) {
+    # code...
+?>
+<tr> 
+    <td><?php echo $data['kd_produk']; ?></td>
+    <td><?php echo $data['nm_produk']; ?></td>
+    <td><?php echo $data['harga_produk']; ?></td>
+    <td><?php echo $data['satuan']; ?></td>
+    <td><?php echo $data['kategori']; ?></td>
+    <td><?php echo $data['url_gambar']; ?></td>
+    <td><a href="editproduk.php?key=<?php echo $data['kd_produk']; ?>">Edit</a> | <a href="deleteproduk.php?key=<?php echo $data['kd_produk']; ?>">Delete</a></td>
+</tr>
+<?php } ?>
+</table>
+        </div>
+    </body>
+    </html>
