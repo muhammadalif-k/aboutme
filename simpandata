@@ -1,0 +1,22 @@
+<?php
+include('CRUD/koneksi.php');
+
+$nm_produk=$_POST['nama'];
+$harga_produk=$_POST['harga'];
+$satuan=$_POST['satuans'];
+$kategori=$_POST['kategoris'];
+$url_gambar=$_POST['url_gambars'];
+$stok=$_POST['stoks'];
+
+
+//print_r($_POST);
+$result = $con->exec("INSERT INTO `produk` (`kd_produk`, `nm_produk`, `harga_produk`, `satuan`, `kategori`, `url_gambar`, `stok`) VALUES (NULL, '$nm_produk', '$harga_produk', '$satuan', '$kategori', '$url_gambar', '$stok')");
+
+echo $result;
+
+if($result==TRUE){
+    echo "Data Tersimpan ke Database";
+}else{
+    echo "Data Gagal Di Simpan";
+}
+?>
