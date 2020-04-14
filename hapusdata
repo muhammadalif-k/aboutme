@@ -1,0 +1,12 @@
+<?php
+include('CRUD/koneksi.php');
+$key=$_GET['key'];
+$hasil=$con->exec("DELETE * FROM `produk` WHERE `kd_produk`=$key ");
+
+if($hasil==TRUE){
+    echo "Data Berhasil di Hapus";
+    header("location:dataproduk.php");
+}else{
+    echo "Data Gagal di Hapus";
+}
+?>
